@@ -1,14 +1,15 @@
 %define 	apxs		/usr/sbin/apxs
-Summary:	Module to keep Apache VirtualHost configuration in an LDAP directory.
+Summary:	Module to keep Apache VirtualHost configuration in an LDAP directory
+Summary(pl):	Modu³ do przechowywania konfiguracji wirtualek Apache'a w katalogu LDAP
 %define tarname mod_cfg_ldap
 Name:		apache-%{tarname}
 Version:	1.1
 Release:	1
+License:	BSD
 Group:		Networking/Daemons
-URL:		http://modcfgldap.sourceforge.net/
 Source0:	http://dl.sourceforge.net/modcfgldap/%{tarname}-%{version}.tar.gz
 # Source0-md5:	42f4018277a2d3673d765d1bfd884c89
-License:	BSD
+URL:		http://modcfgldap.sourceforge.net/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel
 BuildRequires:	db-devel >= 4.2.52
@@ -20,6 +21,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 mod_cfg_ldap allows you to keep your virtual host configuration in a
 LDAP directory and update it in nearly realtime.
 
+%description -l pl
+mod_cfg_ldap pozwala na przechowywanie konfiguracji hostów wirtualnych
+w katalogu LDAP i uaktualnianie jej prawie w czasie rzeczywistym.
+
 %prep
 %setup -q -n %{tarname}-%{version}
 
@@ -28,8 +33,8 @@ LDAP directory and update it in nearly realtime.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}/httpd/modules
+
 install -m755 .libs/%{tarname}.so $RPM_BUILD_ROOT%{_libdir}/httpd/modules
 
 # Install the config file
@@ -42,5 +47,5 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog INSTALL README TODO
-%{_libdir}/httpd/modules/*.so
+%attr(755,root,root) %{_libdir}/httpd/modules/*.so
 %config(noreplace) %{_sysconfdir}/httpd/httpd.conf/*.conf
