@@ -47,6 +47,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog INSTALL README TODO
+%doc AUTHORS ChangeLog INSTALL README TODO *.schema
 %attr(755,root,root) %{_pkglibdir}/*.so
 %config(noreplace) %{_sysconfdir}/httpd.conf/*.conf
