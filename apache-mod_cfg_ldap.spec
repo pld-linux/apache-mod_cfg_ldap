@@ -32,7 +32,8 @@ w katalogu LDAP i uaktualnianie jej prawie w czasie rzeczywistym.
 %setup -q -n mod_%{mod_name}-%{version}
 
 %build
-%{__make} all
+%{__make} all \
+	APXS=%{apxs}
 
 %install
 rm -rf $RPM_BUILD_ROOT
