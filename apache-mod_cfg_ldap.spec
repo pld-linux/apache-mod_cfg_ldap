@@ -1,6 +1,6 @@
 %define 	apxs		/usr/sbin/apxs
 Summary:	Module to keep Apache VirtualHost configuration in an LDAP directory
-Summary(pl):	Modu³ do przechowywania konfiguracji serwerów wirtualnuch Apache'a w katalogu LDAP
+Summary(pl):	Modu³ do przechowywania konfiguracji serwerów wirtualnych Apache'a w katalogu LDAP
 %define tarname mod_cfg_ldap
 Name:		apache-%{tarname}
 Version:	1.1
