@@ -4,21 +4,22 @@ Summary:	Module to keep Apache VirtualHost configuration in an LDAP directory
 Summary(pl):	Modu³ do przechowywania konfiguracji serwerów wirtualnych Apache'a w katalogu LDAP
 Name:		apache-mod_%{mod_name}
 Version:	1.2
-Release:	1
+Release:	2
 License:	BSD
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/modcfgldap/mod_%{mod_name}-%{version}.tar.gz
 # Source0-md5:	055924d6488608f684b22e7b04cea2ea
 URL:		http://modcfgldap.sourceforge.net/
 BuildRequires:	%{apxs}
-BuildRequires:	apache-devel >= 2
+BuildRequires:	apache-devel >= 2.0
 BuildRequires:	db-devel >= 4.2.52
 Requires(post,preun):	%{apxs}
-Requires:	apache >= 2
+Requires:	apache(modules-api) = %apache_modules_api
+Requires:	apache >= 2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR)
-%define		_pkglibdir	%(%{apxs} -q LIBEXECDIR)
+%define		_pkglibdir	%(%{apxs} -q LIBEXECDIR 2>/dev/null)
+%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR 2>/dev/null)
 
 %description
 mod_cfg_ldap allows you to keep your virtual host configuration in a
@@ -39,11 +40,23 @@ w katalogu LDAP i uaktualnianie jej prawie w czasie rzeczywistym.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir}/httpd.conf}
 
-install -m755 .libs/mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}
+install .libs/mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}
 install cfg_ldap.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf/85_mod_cfg_ldap.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+if [ -f /var/lock/subsys/httpd ]; then
+	/etc/rc.d/init.d/httpd restart 1>&2
+fi
+
+%postun
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/httpd ]; then
+		/etc/rc.d/init.d/httpd restart 1>&2
+	fi
+fi
 
 %files
 %defattr(644,root,root,755)
