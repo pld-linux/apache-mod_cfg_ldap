@@ -13,9 +13,7 @@ URL:		http://modcfgldap.sourceforge.net/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0
 BuildRequires:	db-devel >= 4.2.52
-Requires(post,preun):	%{apxs}
 Requires:	apache(modules-api) = %apache_modules_api
-Requires:	apache >= 2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pkglibdir	%(%{apxs} -q LIBEXECDIR 2>/dev/null)
@@ -61,5 +59,5 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog INSTALL README TODO *.schema
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/*_mod_%{mod_name}.conf
 %attr(755,root,root) %{_pkglibdir}/*.so
-%config(noreplace) %{_sysconfdir}/httpd.conf/*.conf
