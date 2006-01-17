@@ -4,7 +4,7 @@ Summary:	Module to keep Apache VirtualHost configuration in an LDAP directory
 Summary(pl):	Modu³ do przechowywania konfiguracji serwerów wirtualnych Apache'a w katalogu LDAP
 Name:		apache-mod_%{mod_name}
 Version:	1.2
-Release:	2
+Release:	3
 License:	BSD
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/modcfgldap/mod_%{mod_name}-%{version}.tar.gz
@@ -13,6 +13,7 @@ URL:		http://modcfgldap.sourceforge.net/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0
 BuildRequires:	db-devel >= 4.2.52
+BuildRequires:	openldap-devel >= 2.3.0
 Requires:	apache(modules-api) = %apache_modules_api
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
