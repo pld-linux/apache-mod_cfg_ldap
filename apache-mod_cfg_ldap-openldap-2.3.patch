@@ -1,0 +1,11 @@
+--- mod_cfg_ldap-1.2/mod_cfg_ldap.c~	2004-09-16 19:02:15.000000000 +0200
++++ mod_cfg_ldap-1.2/mod_cfg_ldap.c	2006-01-18 01:01:50.000000000 +0100
+@@ -45,6 +45,8 @@
+ #include "http_log.h"
+ #include "http_request.h"
+ #include "apr_strings.h"
++
++#define LDAP_DEPRECATED 1
+ #include "ldap.h"
+ 
+ #define CFG_LDAP_NO_SUCH_VHOST "cfg_ldap_no_such_vhost"
