@@ -1,7 +1,7 @@
 %define		mod_name	cfg_ldap
 %define 	apxs		/usr/sbin/apxs
 Summary:	Module to keep Apache VirtualHost configuration in an LDAP directory
-Summary(pl):	Modu≥ do przechowywania konfiguracji serwerÛw wirtualnych Apache'a w katalogu LDAP
+Summary(pl.UTF-8):   Modu≈Ç do przechowywania konfiguracji serwer√≥w wirtualnych Apache'a w katalogu LDAP
 Name:		apache-mod_%{mod_name}
 Version:	1.2
 Release:	4
@@ -26,8 +26,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 mod_cfg_ldap allows you to keep your virtual host configuration in a
 LDAP directory and update it in nearly realtime.
 
-%description -l pl
-mod_cfg_ldap pozwala na przechowywanie konfiguracji hostÛw wirtualnych
+%description -l pl.UTF-8
+mod_cfg_ldap pozwala na przechowywanie konfiguracji host√≥w wirtualnych
 w katalogu LDAP i uaktualnianie jej prawie w czasie rzeczywistym.
 
 %prep
