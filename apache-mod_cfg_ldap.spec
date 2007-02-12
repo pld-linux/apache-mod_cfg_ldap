@@ -1,7 +1,7 @@
 %define		mod_name	cfg_ldap
 %define 	apxs		/usr/sbin/apxs
 Summary:	Module to keep Apache VirtualHost configuration in an LDAP directory
-Summary(pl.UTF-8):   Moduł do przechowywania konfiguracji serwerów wirtualnych Apache'a w katalogu LDAP
+Summary(pl.UTF-8):	Moduł do przechowywania konfiguracji serwerów wirtualnych Apache'a w katalogu LDAP
 Name:		apache-mod_%{mod_name}
 Version:	1.2
 Release:	4
