@@ -32,8 +32,8 @@ mod_cfg_ldap pozwala na przechowywanie konfiguracji hostów wirtualnych
 w katalogu LDAP i uaktualnianie jej prawie w czasie rzeczywistym.
 
 %package -n openldap-schema-mod_cfg_ldap
-Summary:       Amavisd-new LDAP schema
-Summary(pl.UTF-8):     Schemat LDAP dla amavisd-new
+Summary:       mod_cfg_ldap LDAP schema
+Summary(pl.UTF-8):     Schemat LDAP dla mod_cfg_ldap
 Group:         Networking/Daemons
 Requires:      openldap-servers
 
