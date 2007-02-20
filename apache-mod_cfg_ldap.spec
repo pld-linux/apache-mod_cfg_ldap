@@ -15,7 +15,7 @@ BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0
 BuildRequires:	db-devel >= 4.2.52
 BuildRequires:	openldap-devel >= 2.3.0
-BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	rpmbuild(macros) >= 1.304
 Requires:	apache(modules-api) = %apache_modules_api
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -32,10 +32,10 @@ mod_cfg_ldap pozwala na przechowywanie konfiguracji hostów wirtualnych
 w katalogu LDAP i uaktualnianie jej prawie w czasie rzeczywistym.
 
 %package -n openldap-schema-mod_cfg_ldap
-Summary:       mod_cfg_ldap LDAP schema
-Summary(pl.UTF-8):     Schemat LDAP dla mod_cfg_ldap
-Group:         Networking/Daemons
-Requires:      openldap-servers
+Summary:	mod_cfg_ldap LDAP schema
+Summary(pl.UTF-8):	Schemat LDAP dla mod_cfg_ldap
+Group:		Networking/Daemons
+Requires:	openldap-servers
 
 %description -n openldap-schema-mod_cfg_ldap
 This package contains LDAP schema for use with mod_cfg_ldap.
@@ -68,6 +68,16 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 if [ "$1" = "0" ]; then
 	%service -q httpd restart
+fi
+
+%post -n openldap-schema-mod_cfg_ldap
+%openldap_schema_register %{schemadir}/mod_cfg_ldap.schema
+%service -q ldap restart
+
+%postun -n openldap-schema-mod_cfg_ldap
+if [ "$1" = "0" ]; then
+	%openldap_schema_unregister %{schemadir}/mod_cfg_ldap.schema
+	%service -q ldap restart
 fi
 
 %files
