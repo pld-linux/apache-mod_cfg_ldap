@@ -11,7 +11,7 @@ Source0:	http://dl.sourceforge.net/modcfgldap/mod_%{mod_name}-%{version}.tar.gz
 # Source0-md5:	055924d6488608f684b22e7b04cea2ea
 Patch0:		%{name}-openldap-2.3.patch
 URL:		http://modcfgldap.sourceforge.net/
-BuildRequires:	apache-apxs >= 2.0
+BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0
 BuildRequires:	db-devel >= 4.2.52
 BuildRequires:	openldap-devel >= 2.4.6
