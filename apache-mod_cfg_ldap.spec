@@ -6,7 +6,7 @@ Name:		apache-mod_%{mod_name}
 Version:	1.2
 Release:	4
 License:	BSD
-Group:		Networking/Daemons
+Group:		Networking/Daemons/HTTP
 Source0:	http://dl.sourceforge.net/modcfgldap/mod_%{mod_name}-%{version}.tar.gz
 # Source0-md5:	055924d6488608f684b22e7b04cea2ea
 Patch0:		%{name}-openldap-2.3.patch
@@ -34,7 +34,7 @@ w katalogu LDAP i uaktualnianie jej prawie w czasie rzeczywistym.
 %package -n openldap-schema-mod_cfg_ldap
 Summary:	mod_cfg_ldap LDAP schema
 Summary(pl.UTF-8):	Schemat LDAP dla mod_cfg_ldap
-Group:		Networking/Daemons
+Group:		Networking/Daemons/HTTP
 Requires:	openldap-servers
 
 %description -n openldap-schema-mod_cfg_ldap
