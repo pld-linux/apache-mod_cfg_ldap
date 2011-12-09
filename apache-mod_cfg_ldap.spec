@@ -10,7 +10,7 @@ Group:		Networking/Daemons/HTTP
 Source0:	http://dl.sourceforge.net/modcfgldap/mod_%{mod_name}-%{version}.tar.gz
 # Source0-md5:	055924d6488608f684b22e7b04cea2ea
 Patch0:		%{name}-openldap-2.3.patch
-URL:		http://modcfgldap.sourceforge.net/
+URL:		http://sourceforge.net/projects/modcfgldap/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0
 BuildRequires:	db-devel >= 4.2.52
@@ -20,7 +20,7 @@ Requires:	apache(modules-api) = %apache_modules_api
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pkglibdir	%(%{apxs} -q LIBEXECDIR 2>/dev/null)
-%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR 2>/dev/null)
+%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR 2>/dev/null)/conf.d
 %define		schemadir	/usr/share/openldap/schema
 
 %description
@@ -53,11 +53,11 @@ Ten pakiet zawiera schemat LDAP do używania z mod_cfg_ldap.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir}/httpd.conf}
+install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir},%{schemadir}}
 
-install .libs/mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}
-install cfg_ldap.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf/85_mod_cfg_ldap.conf
-install -D mod_cfg_ldap.schema $RPM_BUILD_ROOT%{schemadir}/mod_cfg_ldap.schema
+install -p .libs/mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}
+cp -p cfg_ldap.conf $RPM_BUILD_ROOT%{_sysconfdir}/85_mod_cfg_ldap.conf
+cp -p mod_cfg_ldap.schema $RPM_BUILD_ROOT%{schemadir}/mod_cfg_ldap.schema
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -83,7 +83,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog INSTALL README TODO
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/*_mod_%{mod_name}.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*_mod_%{mod_name}.conf
 %attr(755,root,root) %{_pkglibdir}/*.so
 
 %files -n openldap-schema-mod_cfg_ldap
